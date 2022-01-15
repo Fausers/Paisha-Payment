@@ -1,6 +1,9 @@
 @extends('layouts.pay')
 
 @section('content')
+<div class="col-md-6">
+
+
 <div class="accordion accordion-toggle-arrow" id="accordionExample1">
     <div class="card">
         <div class="card-header">
@@ -194,5 +197,7 @@
         <!--end::Container-->
     </div>
 </footer>
+
+</div>
 
 @endsection

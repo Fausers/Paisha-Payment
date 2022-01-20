@@ -28,7 +28,7 @@
                                 <span class="text-muted font-weight-bold d-block"></span>
                             </td>
                             <td>
-                                
+
                             </td>
                             <td class="text-right pr-0">
                                 <h3>TZS 10,000</h3>
@@ -55,16 +55,16 @@
                                 <span class="text-muted font-weight-bold d-block">TZS 9,000</span>
                             </td>
                         </tr>
-                        <tr>                           
+                        <tr>
                             <td class="pl-0">
                                 <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg">Payment To</a>
                                 <span class="text-muted font-weight-bold d-block">Paisha Services</span>
                             </td>
                             <td>
-                                
+
                             </td>
                             <td class="text-right pr-0">
-                                
+
                             </td>
                         </tr>
                         <tr>
@@ -72,16 +72,16 @@
                                 <a href="#" class="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg">Description</a>
                                 <span class="text-muted font-weight-bold d-block">Whallet ammount credited for user: Dahabu Saidi</span>
                             </td>
-                           
-                            
+
+
                         </tr>
-                        
+
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <hr>
@@ -92,7 +92,7 @@
         <div class="card card-custom wave wave-animate wave-danger">
             <div class="card-body">
              <div class=" align-items-center p-5">
-              
+
               <div class=" " style="align-items: center">
                 <h1 style="text-align: center;">
                     <table style="margin-left:auto;margin-right:auto;">
@@ -118,7 +118,7 @@
                             <td style="font-size: 8px"></td>
                             <td style="font-size: 8px">SECONDS</td>
                         </tr>
-                            
+
                         </tbody>
                     </table>
                 </h1>
@@ -134,7 +134,7 @@
             <div class="col-4" >
                 <!--begin::Card-->
                 <div class="card card-custom card-stretch" style="box-shadow: 0 1px 3px 0 gray">
-                
+
                     <div class="card-body p-3">
                         <img width="100%" src="/logo/airtel.png">
                     </div>
@@ -144,7 +144,7 @@
             <div class="col-4" >
                 <!--begin::Card-->
                 <div class="card card-custom card-stretch" style="box-shadow: 0 1px 3px 0 gray">
-                    
+
                     <div class="card-body p-3">
                         <img width="100%" src="/logo/tigo.png">
                     </div>
@@ -154,7 +154,7 @@
             <div class="col-4" >
                 <!--begin::Card-->
                 <div class="card card-custom card-stretch" style="box-shadow: 0 1px 3px 0 gray">
-                    
+
                     <div class="card-body p-3">
                         <img width="100%" src="/logo/mpesa.jpg">
                     </div>
@@ -181,16 +181,17 @@
         <div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
             <!--begin::Copyright-->
             <div class="text-dark order-2 order-md-1">
-                <span class="text-muted font-weight-bold mr-2">2022©</span>
-                <a href="http://keenthemes.com/metronic" target="_blank" class="text-dark-75 text-hover-primary">Powerd By Paisha</a>
+                <span class="text-muted font-weight-bold mr-2">{{date('Y')}}©</span>
+                <a href="/" target="_blank" class="text-dark-75 text-hover-primary">Powerd By
+                    {{config('app.name')}}</a>
             </div>
             <!--end::Copyright-->
             <!--begin::Nav-->
-           
+
                 <div class="card-body p-3" >
-                    <img width="60%" style="display: block;
-                    margin-left: auto;
-                    margin-right: auto;" src="/logo/paisha.png">
+{{--                    <img width="60%" style="display: block;--}}
+{{--                    margin-left: auto;--}}
+{{--                    margin-right: auto;" src="/logo/paisha.png">--}}
                 </div>
             <!--end::Nav-->
         </div>

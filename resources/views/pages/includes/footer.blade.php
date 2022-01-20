@@ -6,7 +6,7 @@
             <span class="text-muted font-weight-bold mr-2">2021©</span>
             Developed By
             <a href="http://luxtechtz.com" target="_blank"
-               class="text-dark-75 text-hover-primary">LuxTechTZ</a>
+               class="text-dark-75 text-hover-primary">Simusolar</a>
         </div>
         <!--end::Copyright-->
         <!--begin::Nav-->

@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['web', 'checkblocked']], function () {
     Route::get('/', 'App\Http\Controllers\WelcomeController@welcome')->name('welcome');
     Route::get('/terms', 'App\Http\Controllers\TermsController@terms')->name('terms');
+
+
 });
 
 // Authentication Routes
@@ -134,5 +136,4 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
 
 Route::redirect('/php', '/phpinfo', 301);
 
-require_once __DIR__ . '/mwangaza.php';
-require_once __DIR__ . '/app/sms.php';
+require_once __DIR__ . '/app/payment.php';

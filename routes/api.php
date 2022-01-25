@@ -19,7 +19,3 @@ use Illuminate\Support\Facades\Route;
      return $request->user();
  });
 
-
-Route::post('/manager/products/desc/{id}', [PostManagementController::class,'desc'])->name('post_desc');
-
-Route::post('/manager/products/store_image/{id}', [PostManagementController::class,'uploadImage'])->name('upload_post_image');

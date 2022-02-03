@@ -7,6 +7,7 @@ use App\Models\OutgoingSMS;
 use App\Models\Wallet;
 use DOMDocument;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class PaymentController extends Controller
 {
@@ -39,14 +40,25 @@ class PaymentController extends Controller
         $opco = 1; // /Operation country TZ
         $operator = 'Vodacom';
 
+//        Check Existence Of account  Redis
+        $values = Redis::sismember('pay_ref', $accountReference);
+
+        if (json_encode($values) == 0){
+            $serviceStatus = 'FAILED';
+            $code = 999;
+        }else{
+            $serviceStatus = 'Success';
+            $code = 0;
+        }
+
         $initial_response =  array(
             'originatorConversationID' => $originatorConversationID,
             'transactionID' => $transactionID,
             'serviceID' => $this->generateID(),
             'conversationID' => $conversationID,
-            'responseCode' => 0,
+            'responseCode' => $code,
             'responseDesc' => 'Received',
-            'serviceStatus' => 'Success',
+            'serviceStatus' => $serviceStatus,
             'initiator' => $initiator);
 
         $this->getInitialResponse($initial_response);

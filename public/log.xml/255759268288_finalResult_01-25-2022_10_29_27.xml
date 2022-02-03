@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mpesaBroker xmlns="http://infowise.co.tz/broker/" version="2.0">
+  <result>
+    <serviceProvider>
+      <spId>237733</spId>
+      <spPassword/>
+      <timestamp>20220120155840</timestamp>
+    </serviceProvider>
+    <transaction>
+      <resultType>Completed</resultType>
+      <resultCode>0</resultCode>
+      <resultDesc>Success</resultDesc>
+      <serviceReceipt>1159486</serviceReceipt>
+      <serviceDate>2022-01-25 10:29:27</serviceDate>
+      <serviceID>1159486</serviceID>
+      <originatorConversationID>158f979998d849cba9bdda37c2533b63</originatorConversationID>
+      <conversationID>9AK76I5E149</conversationID>
+      <transactionID>647741672_237733</transactionID>
+      <initiator>255759268288</initiator>
+      <initiatorPassword/>
+    </transaction>
+  </result>
+</mpesaBroker>

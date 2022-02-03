@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MobilePayment;
 use App\Models\OutgoingSMS;
+use App\Models\Wallet;
 use DOMDocument;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,7 @@ class PaymentController extends Controller
 
     public function vodacom(Request $request)
     {
+
         $payload = simplexml_load_string($request->getContent());
 
 
@@ -84,11 +86,10 @@ class PaymentController extends Controller
             'accountReference' => $accountReference
         );
 
-         return $this->reponceToVodacom($finalResults);
 
-
-        return response($this->getInitialResponse($initial_response),200)
+        return response($this->responseToVodacom($finalResults),200)
             ->header('Content-Type', 'text/plain');
+
 
     }
 
@@ -125,8 +126,10 @@ class PaymentController extends Controller
         return $output;
     }
 
-    public function reponceToVodacom($responseData)
+    public function responseToVodacom($responseData)
     {
+
+//        return $this->getPassword($responseData['spId'],2);
 
         $dom = new DOMDocument('1.0','UTF-8');
         $dom->formatOutput = true;
@@ -163,7 +166,7 @@ class PaymentController extends Controller
 //https://49cc02c3-d38f-456c-af1b-e488570f4daa.mock.pstmn.io
         $callback_data=$dom->saveXML();
 //        $requestURL="https://broker2.ipg.tz.vodafone.com:30009/iPG/c2b/multione";
-        $requestURL="https://49cc02c3-d38f-456c-af1b-e488570f4daa.mock.pstmn.io/iPG/c2b/multione";
+        $requestURL="https://49cc02c3-d38f-456c-af1b-e488570f4daa.mock.pstmn.io/vod";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $requestURL);
@@ -174,69 +177,58 @@ class PaymentController extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POST, TRUE);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $callback_data);
         curl_setopt($ch, CURLOPT_CERTINFO, true);
         curl_setopt($ch, CURLOPT_ENCODING, "");
         curl_setopt($ch, CURLOPT_VERBOSE, true);
 
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSLKEY, "certs/simusolar.vodacom.co.tz.key");
-        curl_setopt($ch, CURLOPT_SSLCERT, "certs/simusolar.vodacom.co.tz.cer");
+        curl_setopt($ch, CURLOPT_SSLKEY, "file:///laragon/www/payment/public/certs/simusolar.vodacom.co.tz.key");
+        curl_setopt($ch, CURLOPT_SSLCERT, "file:///laragon/www/payment/public/certs/simusolar.vodacom.co.tz.cer");
         $results = curl_exec($ch);
-
-//        $flog_file=$config['log']['payment_xml_log_files'].$responseData['initiator'].'_'.'confirmResult_'.date('m-d-Y_h_i_s').'.xml';
-//        $verbose_log=$config['log']['payment_xml_log_files'].$responseData['initiator'].'_'.'verbosity_'.date('m-d-Y_h_i_s').'.xml';
-//
-//        if (curl_errno($ch)) {
-//            $error_log="Error: " . curl_error($ch);
-//            file_put_contents ($verbose_log, $error_log);
-//            file_put_contents ($flog_file, $results);
-//        } else {
-//            file_put_contents ($flog_file, $results);
-//
-//        }
 
         curl_close ($ch);
 
-        return "Success";
+        return $results;
     }
 
     function getPassword($spID=null,$passType=null){
-        $config = require realpath(__DIR__.'/../../../includes/config.inc.php');
-        $publicKey = $config['local']['internal']['encryptionKey'];
+        $publicKey = 'file:///laragon/www/payment/public/certs/broker.tz.vodafone.com.pem';
 
-        $config =new Config;
-        $password = $this->getApiPassword($spID);
+        $wallet = Wallet::where('apiUsername',$spID)->first();
+        $password = $wallet->apiPassword;
+
 
         if($passType==1){ //passtype 1 is initiator password
 
-            $initiatorpassword=$config->getInitPassword();
+            $initiatorpassword= "WH-17365BFK0DER";
             @openssl_public_encrypt($initiatorpassword,$encryptedPassword,$publicKey,OPENSSL_PKCS1_PADDING);
             return base64_encode($encryptedPassword);   //encrypted string
 
-         }elseif($passType==2){
+             }elseif($passType==2){
 
-        //passtype 2 is spPassword
-        $timestamp=date('YmdHis');
-        $pass=$spID.$password.$timestamp;
-        $hash=hash('sha256', $pass);
-        $spPassword=base64_encode($hash);
-        return $spPassword;
-     }
+            //passtype 2 is spPassword
+            $timestamp=date('YmdHis');
+            $pass=$spID.$password.$timestamp;
+            $hash=hash('sha256', $pass);
+            $spPassword=base64_encode($hash);
+            return $spPassword;
+         }
+
 
     }
 
 
-        public function airtel()
-        {
-        }
-        public function pesapall()
-        {
-        }
+    public function airtel()
+    {
+    }
+    public function pesapall()
+    {
+    }
 
-        public function airteluganda()
-        {
-        }
+    public function airteluganda()
+    {
+    }
 
 }

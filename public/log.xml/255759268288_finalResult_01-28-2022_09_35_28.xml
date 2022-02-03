@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mpesaBroker xmlns="http://infowise.co.tz/broker/" version="2.0">
+  <result>
+    <serviceProvider>
+      <spId>237733</spId>
+      <spPassword>YWZmMWZiNDJhZjRjZjc0MmEyMTZlY2I5MDcyNTkzZWEzZDllN2IyZDVlOTI1NjQyYTAwMjUxY2MzYTY5MmU1ZA==</spPassword>
+      <timestamp>20220120155840</timestamp>
+    </serviceProvider>
+    <transaction>
+      <resultType>Completed</resultType>
+      <resultCode>0</resultCode>
+      <resultDesc>Success</resultDesc>
+      <serviceReceipt>1159486</serviceReceipt>
+      <serviceDate>2022-01-28 09:35:28</serviceDate>
+      <serviceID>1159486</serviceID>
+      <originatorConversationID>158f979998d849cba9bdda37c2533b63</originatorConversationID>
+      <conversationID>9AK76I5E149</conversationID>
+      <transactionID>647741672_237733</transactionID>
+      <initiator>255759268288</initiator>
+      <initiatorPassword>NM5ae+Cd7jwehloRphg416NQFvKwUeoI3k6wnCzsPLDfqpaUxLW5AIZBf4hUksn6399cluoA2Mfon9EjMI1quXX1fmaeTzvZoO+qo2Kef/xCQwa5se3veYkPz5Fz/rv4gNPjooOZ3S5WN8BjkIow7t/9eq4bzmIFbJKVtbo4gn2LtkMgDdHP4jOAbe2e6ZgcS+Er0yLvv0Y218a//jsMsVKpDbSb1DIeD2+KgSdqPDK2lVTkki+a9Q/lsdgJ8OvDWrMzvQfZC/FBZ3WaLbjH/6qRnml8Pelcn+2O2XFqDpiTJS/fR/5ExAQ4PyE51w8o69+/DqsA+HWIHPcgNq9zRQ==</initiatorPassword>
+    </transaction>
+  </result>
+</mpesaBroker>

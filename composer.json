@@ -9,7 +9,12 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "ext-curl": "*",
+        "ext-dom": "*",
         "ext-intl": "*",
+        "ext-json": "*",
+        "ext-openssl": "*",
+        "ext-simplexml": "*",
         "creativeorange/gravatar": "^1.0",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.2",
@@ -32,6 +37,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "laravelcollective/html": "^6.1",
+        "predis/predis": "^1.1",
         "pusher/pusher-php-server": "^4.1",
         "rap2hpoutre/laravel-log-viewer": "^1.4",
         "shvetsgroup/laravel-email-database-log": "^8.0.0",
@@ -40,11 +46,7 @@
         "socialiteproviders/instagram": "^3.0",
         "socialiteproviders/linkedin": "^3.1",
         "socialiteproviders/twitch": "^5.1",
-        "socialiteproviders/youtube": "^3.0",
-      "ext-simplexml": "*",
-        "ext-dom": "*",
-        "ext-curl": "*",
-        "ext-openssl": "*"
+        "socialiteproviders/youtube": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

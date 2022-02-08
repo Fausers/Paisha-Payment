@@ -1,8 +1,8 @@
 <?php
 
 
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\RedisController;
+use App\Http\Controllers\Gateway\PaymentController;
+use App\Http\Controllers\Gateway\RedisController;
 use Illuminate\Support\Facades\Route;
 
 

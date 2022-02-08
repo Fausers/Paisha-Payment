@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Gateway;
 
-use App\Models\Order;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redis;
 
 class RedisController extends Controller
@@ -16,11 +15,7 @@ class RedisController extends Controller
      */
     public function show(): string
     {
-        $orders = Order::get();
 
-//        foreach ($orders as $order){
-//            Redis::sadd('pay_ref', $order->OrderPaymentRefNo);
-//        }
 
         $values = Redis::sismember('pay_ref','2101000885');
 

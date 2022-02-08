@@ -1,108 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Gateway;
 
+use App\Http\Controllers\Controller;
 use App\Models\MobilePayment;
 use App\Models\OutgoingSMS;
 use App\Models\Wallet;
 use DOMDocument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use function response;
 
 class PaymentController extends Controller
 {
     public function tigo()
     {
-    }
-
-    public function vodacom(Request $request)
-    {
-
-        $payload = simplexml_load_string($request->getContent());
-
-
-        $spId = (string)$payload->request->serviceProvider->spId;
-        $spPassword = (string)$payload->request->serviceProvider->spPassword;
-        $timestamp = (string)$payload->request->serviceProvider->timestamp;
-
-        $amount = (double)$payload->request->transaction->amount;
-        $commandID = (string)$payload->request->transaction->commandID;
-        $initiator = (string)$payload->request->transaction->initiator;
-        $conversationID = (string)$payload->request->transaction->conversationID;
-        $originatorConversationID = (string)$payload->request->transaction->originatorConversationID;
-        $recipient = (string)$payload->request->transaction->recipient;
-        $mpesaReceipt = (string)$payload->request->transaction->mpesaReceipt;
-        $transactionDate = (string)$payload->request->transaction->transactionDate;
-        $accountReference = (string)$payload->request->transaction->accountReference;
-        $transactionID = (string)$payload->request->transaction->transactionID;
-
-        $resultURL = (string)$payload->request->resultURL;
-        $opco = 1; // /Operation country TZ
-        $operator = 'Vodacom';
-
-//        Check Existence Of account  Redis
-        $values = Redis::sismember('pay_ref', $accountReference);
-
-        if (json_encode($values) == 0){
-            $serviceStatus = 'FAILED';
-            $code = 999;
-        }else{
-            $serviceStatus = 'Success';
-            $code = 0;
-        }
-
-        $initial_response =  array(
-            'originatorConversationID' => $originatorConversationID,
-            'transactionID' => $transactionID,
-            'serviceID' => $this->generateID(),
-            'conversationID' => $conversationID,
-            'responseCode' => $code,
-            'responseDesc' => 'Received',
-            'serviceStatus' => $serviceStatus,
-            'initiator' => $initiator);
-
-        $this->getInitialResponse($initial_response);
-
-        $payment = new MobilePayment;
-        $payment->apiUsername = $spId;
-        $payment->apiPassword = $spPassword;
-        $payment->serviceID = $recipient;
-        $payment->transid = $transactionID;
-        $payment->amount = $amount;
-        $payment->msisdn = $initiator;
-        $payment->referenceNo = $accountReference;
-        $payment->timestamp = $transactionDate;
-        $payment->recdate = $timestamp;
-        $payment->payment_status = "SUCCESFUL";
-        $payment->payment_status_description = "SUCCESFUL";
-        $payment->mpesa_receipt = $mpesaReceipt;
-        $payment->opco = $opco;
-
-        $payment->save();
-
-        $finalResults = array(
-            'spId' => $spId,
-            'spPassword' => $spPassword,
-            'timestamp' => $timestamp,
-            'resultType' => 'Completed',
-            'resultCode' => 0,
-            'resultDesc' => 'Success',
-            'serviceReceipt' => $this->generateID(),
-            'serviceDate' => date('Y-m-d H:i:s'),
-            'serviceID' => $this->generateID(15),
-            'originatorConversationID' => $originatorConversationID,
-            'conversationID' => $conversationID,
-            'transactionID' => $transactionID,
-            'initiator' => $initiator,
-            'url' => $resultURL,
-            'accountReference' => $accountReference
-        );
-
-
-        return response($this->responseToVodacom($finalResults),200)
-            ->header('Content-Type', 'text/plain');
-
-
     }
 
     public function generateID()
@@ -178,7 +90,7 @@ class PaymentController extends Controller
 //https://49cc02c3-d38f-456c-af1b-e488570f4daa.mock.pstmn.io
         $callback_data=$dom->saveXML();
 //        $requestURL="https://broker2.ipg.tz.vodafone.com:30009/iPG/c2b/multione";
-        $requestURL="https://49cc02c3-d38f-456c-af1b-e488570f4daa.mock.pstmn.io/vod";
+        $requestURL="https://cddd16db-b1d8-48dd-9b28-1940e1b02a88.mock.pstmn.io/vodacom";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $requestURL);
@@ -197,12 +109,17 @@ class PaymentController extends Controller
 
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSLKEY, "file:///laragon/www/payment/public/certs/simusolar.vodacom.co.tz.key");
-        curl_setopt($ch, CURLOPT_SSLCERT, "file:///laragon/www/payment/public/certs/simusolar.vodacom.co.tz.cer");
-        $results = curl_exec($ch);
+//        curl_setopt($ch, CURLOPT_SSLCERT, "file:///laragon/www/payment/public/certs/simusolar.vodacom.co.tz.cer");
+        $response = curl_exec($ch);
 
-        curl_close ($ch);
+        // Check for errors
+        if($response === FALSE){
+                echo $response;
 
-        return $results;
+            die(curl_error($ch));
+        }
+        return $response;
+
     }
 
     function getPassword($spID=null,$passType=null){

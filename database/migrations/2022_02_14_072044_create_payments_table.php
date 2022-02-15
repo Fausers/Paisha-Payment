@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTimestampsToMobilepaymentTable extends Migration
+class CreatePaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,14 @@ class AddTimestampsToMobilepaymentTable extends Migration
      */
     public function up()
     {
-        Schema::table('vtiger_mobilepayments', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
+            $table->id();
+            $table->string('sp_id');
+            $table->string('time_stamp');
+            $table->string('initiator');
+            $table->string('conversation_id');
+            $table->string('recipient');
+            $table->float('amount');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -26,8 +33,6 @@ class AddTimestampsToMobilepaymentTable extends Migration
      */
     public function down()
     {
-        Schema::table('vtiger_mobilepayments', function (Blueprint $table) {
-            $table->dropColumn('created_at','updated_at','deleted_at');
-        });
+        Schema::dropIfExists('payments');
     }
 }

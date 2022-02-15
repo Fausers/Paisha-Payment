@@ -53,4 +53,4 @@ yarn-error.log
 
 
 #Log Files
-/public/log.xml/
+/public/log.xml/*

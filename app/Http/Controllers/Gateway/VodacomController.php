@@ -36,8 +36,9 @@ class VodacomController extends Controller
         $operator = 'Vodacom';
 
 //        Check Existence Of account  Redis
-        $values = Redis::sismember('pay_ref', $accountReference);
+         $values = Redis::sismember('pay_ref', $accountReference);
 
+//        return json_encode($values);
         if (json_encode($values) == 0){
             $serviceStatus = 'FAILED';
             $code = 999;
@@ -58,7 +59,7 @@ class VodacomController extends Controller
 
         $payment_control->getInitialResponse($initial_response);
 
-        $payment = new MobilePayment;
+        $payment = new MobileP ayment;
         $payment->apiUsername = $spId;
         $payment->apiPassword = $spPassword;
         $payment->serviceID = $recipient;

@@ -11,6 +11,8 @@ class VodacomController extends Controller
 {
     public function vodacom(Request $request)
     {
+
+
         $payment_control = new PaymentController;
 
 
@@ -59,7 +61,23 @@ class VodacomController extends Controller
 
         $payment_control->getInitialResponse($initial_response);
 
-        $payment = new MobileP ayment;
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://cddd16db-b1d8-48dd-9b28-1940e1b02a88.mock.pstmn.io/local_vodacom');
+        curl_setopt($ch, CURLOPT_HEADER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_VERBOSE, 1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_FRESH_CONNECT, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLINFO_HEADER_OUT, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Connection: Keep-Alive'
+        ));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+        return $response = curl_exec($ch);
+
+        $payment = new MobilePayment;
         $payment->apiUsername = $spId;
         $payment->apiPassword = $spPassword;
         $payment->serviceID = $recipient;

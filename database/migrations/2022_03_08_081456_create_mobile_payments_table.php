@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWalletsTable extends Migration
+class CreateMobilePaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,19 @@ class CreateWalletsTable extends Migration
      */
     public function up()
     {
-        Schema::create('wallets', function (Blueprint $table) {
+        Schema::create('mobile_payments', function (Blueprint $table) {
             $table->id();
             $table->string('api_username');
             $table->string('api_password');
-            $table->string('api_type');
-            $table->string('secret');
-            $table->string('callback_url');
+            $table->string('service_id');
+            $table->string('trans_id');
+            $table->string('amount');
+            $table->string('msnid');
+            $table->string('reference_no');
+            $table->string('payment_status');
+            $table->string('payment_status_desc');
+            $table->string('payment_receipt');
+            $table->string('opco');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -32,6 +38,6 @@ class CreateWalletsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wallets');
+        Schema::dropIfExists('mobile_payments');
     }
 }

@@ -15,7 +15,13 @@ class CreateWalletsConfigTable extends Migration
     {
         Schema::create('wallets_config', function (Blueprint $table) {
             $table->id();
+            $table->string('api_username');
+            $table->string('api_password');
+            $table->string('api_type');
+            $table->string('api_secret');
+            $table->string('callback_url');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

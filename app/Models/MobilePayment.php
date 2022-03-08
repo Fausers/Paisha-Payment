@@ -16,6 +16,6 @@ class MobilePayment extends Model
      *
      * @var string
      */
-    protected $table = 'vtiger_mobilepayments';
+    protected $table = 'mobile_payments';
 
 }

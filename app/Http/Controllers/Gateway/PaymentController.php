@@ -19,9 +19,10 @@ class PaymentController extends Controller
 
     public function generateID()
     {
-        $last_msg =  OutgoingSMS::orderBy('msg_id','desc')->first();
-        $last_msg->msg_id++;
-        return $last_msg->msg_id;
+//        $last_msg =  OutgoingSMS::orderBy('msg_id','desc')->first();
+        $last_msg = rand(2000,9999);
+        $last_msg++;
+        return $last_msg;
     }
 
     function getInitialResponse($responseData=null){
@@ -125,13 +126,13 @@ class PaymentController extends Controller
     function getPassword($spID=null,$passType=null){
         $publicKey = 'file:///laragon/www/payment/public/certs/broker.tz.vodafone.com.pem';
 
-        $wallet = Wallet::where('apiUsername',$spID)->first();
-        $password = $wallet->apiPassword;
+        $wallet = Wallet::where('api_username',$spID)->first();
+        $password = $wallet->api_password;
 
 
         if($passType==1){ //passtype 1 is initiator password
 
-            $initiatorpassword= "WH-17365BFK0DER";
+            $initiatorpassword= $wallet->api_secret;
             @openssl_public_encrypt($initiatorpassword,$encryptedPassword,$publicKey,OPENSSL_PKCS1_PADDING);
             return base64_encode($encryptedPassword);   //encrypted string
 
@@ -144,7 +145,6 @@ class PaymentController extends Controller
             $spPassword=base64_encode($hash);
             return $spPassword;
          }
-
 
     }
 

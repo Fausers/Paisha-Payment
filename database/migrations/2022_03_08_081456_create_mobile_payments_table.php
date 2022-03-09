@@ -20,7 +20,7 @@ class CreateMobilePaymentsTable extends Migration
             $table->string('service_id');
             $table->string('trans_id');
             $table->dateTime('trans_date');
-            $table->timestamp('trans_timestamp')->nullable();
+            $table->dateTime('trans_timestamp')->nullable();
             $table->string('amount');
             $table->string('msnid');
             $table->string('reference_no');

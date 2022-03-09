@@ -69,7 +69,7 @@ class VodacomController extends Controller
         $payment->msnid = $initiator;
         $payment->reference_no = $accountReference;
         $payment->trans_date = $transactionDate;
-//        $payment->trans_timestamp = $timestamp;
+        $payment->trans_timestamp = $timestamp;
         $payment->payment_status = "SUCCESFUL";
         $payment->payment_status_desc = "SUCCESFUL";
         $payment->payment_receipt = $mpesaReceipt;

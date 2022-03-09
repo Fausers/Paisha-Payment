@@ -17,6 +17,6 @@ Route::group(['middleware' => ['web', 'checkblocked']], function () {
 
     Route::get('/payment_refs', [PayReferenceController::class,'index'])->name('payment_refs');
     Route::post('/add_payment_ref', [PayReferenceController::class,'create'])->name('add_payment_ref');
-    Route::get('/remove_payment_ref', [PayReferenceController::class,'create'])->name('add_payment_ref');
+    Route::delete('/remove_payment_ref', [PayReferenceController::class,'destroy'])->name('remove_payment_ref');
 });
 

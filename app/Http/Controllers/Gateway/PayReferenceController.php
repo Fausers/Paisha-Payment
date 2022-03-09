@@ -16,7 +16,9 @@ class PayReferenceController extends Controller
      */
     public function index()
     {
-        return Redis::SMEMBERS('pay_ref');
+        $response = Redis::SMEMBERS('pay_ref');
+        return response(json_encode($response),'200')->header('Content-Type','application/json');
+
     }
 
     /**
@@ -26,7 +28,13 @@ class PayReferenceController extends Controller
      */
     public function create(Request $request)
     {
-        return Redis::SADD('pay_ref',$request['reference']);
+        $response = Redis::SADD('pay_ref',$request['reference']);
+        if ($response == 1){
+            return response('Payment Reference Added','201')->header('Content-Type','application/json');
+        }else{
+            return response('Payment Reference Already Exist','202')->header('Content-Type','application/json');
+        }
+
     }
 
 
@@ -38,7 +46,8 @@ class PayReferenceController extends Controller
      */
     public function show($id)
     {
-        return  Redis::sismember('pay_ref',$id);
+        $response = Redis::sismember('pay_ref',$id);
+        return response(json_encode($response),'200')->header('Content-Type','application/json');
     }
 
 
@@ -48,8 +57,15 @@ class PayReferenceController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Request $request): Response
     {
-        return  Redis::SREM('pay_ref',$id);
+        $response = Redis::SREM('pay_ref',$request['id']);
+
+        if ($response == 1){
+            return response('Reference Deleted','203')->header('Content-Type','application/json');
+        }else{
+            return response('Reference Not Found','202')->header('Content-Type','application/json');
+        }
+
     }
 }

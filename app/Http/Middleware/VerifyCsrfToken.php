@@ -13,6 +13,7 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected $except = [
         "/vodacom",
-        "/add_payment_ref"
+        "/add_payment_ref",
+        "/remove_payment_ref"
     ];
 }

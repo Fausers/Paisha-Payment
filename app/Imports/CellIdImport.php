@@ -25,7 +25,7 @@ class CellIdImport implements ToCollection
                 'changeable' => $row[10],
                 'created' => $row[11],
                 'updated' => $row[12],
-                'average_signal' => $row[13],
+//                'average_signal' => $row[13],
             ]);
         }
     }

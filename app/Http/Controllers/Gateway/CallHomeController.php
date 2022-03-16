@@ -13,7 +13,7 @@ class CallHomeController extends Controller
 {
     public function index(Request $request)
     {
-        return $request->all();
+//        return $request->all();
         $status = Redis::GET($request->ip());
 
         if ($status == 'OFF'){

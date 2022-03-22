@@ -1,8 +1,0 @@
-POST /pesapal_save HTTP/1.1
-Accept:         */*
-Connection:     Keep-Alive
-Content-Length: 503
-Content-Type:   application/json
-Host:           payment.test
-
-{"@attributes":{"version":"2.0"},"request":{"serviceProvider":{"spId":"237733","spPassword":"ZjmWHUVUK+jH0vovBH0rClIMQ6fBVR3UWhdCxbt3o7g=","timestamp":"20220120155840"},"transaction":{"amount":"2000.00","commandID":"Pay Bill","initiator":"255765204506","conversationID":"9AK76I5E149","originatorConversationID":"158f979998d849cba9bdda37c2533b63","recipient":"237733","mpesaReceipt":"9AK76I5E149","transactionDate":"2022-01-20 15:58:39","accountReference":"19950315","transactionID":"647741672_237733"}}}

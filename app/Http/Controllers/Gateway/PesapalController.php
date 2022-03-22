@@ -4,15 +4,15 @@ namespace App\Http\Controllers\Gateway;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
+use DOMDocument;
 
 class PesapalController extends Controller
 {
     public function index(Request $request)
     {
 
-
         $payload = simplexml_load_string($request->getContent());
-
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, route('pesapal_save'));
@@ -30,7 +30,39 @@ class PesapalController extends Controller
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
         curl_exec($ch);
 
-         return response($request->getContent(),'201')->header('Content-Type','application/json');
+        $data = json_encode($payload);
+        $jdata =  json_decode($data,true);
+
+
+        //        Check Existence Of account  Redis
+        $values = Redis::sismember('pay_ref', $jdata['CUSTOMERREFERENCEID']);
+
+        $RESULT = "Null";
+        $serviceStatus = null;
+        $code = 0;
+
+        if (json_encode($values) == 0){
+            $serviceStatus = 'FAILED';
+            $code = '010';
+        }else{
+            $serviceStatus = 'SUCCESSFUL';
+            $code = '000';
+            $RESULT = 'TS';
+        }
+
+        $initial_response =  array(
+            'TYPE' => $jdata['COMPANYNAME'],
+            'REFID' => $jdata['CUSTOMERREFERENCEID'],
+            'TXNID' => $jdata['AGTXNID'],
+            'RESULT' => $RESULT,
+            'ERRORCODE' => $code,
+            'ERRORDESC' => $serviceStatus,
+            'MSISDN' => $jdata['MSISDN'],
+            'AGTXNID' => $jdata['AGTXNID']);
+
+         $response = $this->createResponse($initial_response);
+         
+        return response($response,'201')->header('Content-Type','application/xml');
     }
 
     public function save(Request $request)
@@ -41,5 +73,31 @@ class PesapalController extends Controller
         fclose($myfile);
 
         echo "Done";
+    }
+
+    function createResponse($responseData=null){
+
+        $dom = new DOMDocument('1.0','UTF-8');
+        $dom->formatOutput = true;
+        $version="1.0";
+
+
+        $namespaceuri= "http://infowise.co.tz/broker/";
+
+        $root = $dom->createElementNS($namespaceuri,'COMMAND'); //append namespace to root
+        $root->appendChild($dom->createAttribute('version'))->appendChild($dom->createTextNode($version)); //append version 2.0
+        $dom->appendChild($root);
+
+        $root->appendChild($dom->createElement('TYPE', $responseData['TYPE']));
+        $root->appendChild($dom->createElement('REFID', $responseData['REFID']));
+        $root->appendChild($dom->createElement('TXNID', $responseData['TXNID']));
+        $root->appendChild($dom->createElement('RESULT', $responseData['RESULT']));
+        $root->appendChild($dom->createElement('ERRORCODE', $responseData['ERRORCODE']));
+        $root->appendChild($dom->createElement('ERRORDESC', $responseData['ERRORDESC']));
+        $root->appendChild($dom->createElement('MSISDN', $responseData['MSISDN']));
+        $root->appendChild($dom->createElement('AGTXNID', $responseData['AGTXNID']));
+
+        $output=$dom->saveXML();
+        return $output;
     }
 }

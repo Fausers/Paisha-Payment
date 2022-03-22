@@ -15,7 +15,7 @@ class PesapalController extends Controller
 
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, url()->current().'/pesapal_save');
+        curl_setopt($ch, CURLOPT_URL, route('pesapal_save'));
         curl_setopt($ch, CURLOPT_HEADER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_VERBOSE, 1);
@@ -28,7 +28,7 @@ class PesapalController extends Controller
             'Connection: Keep-Alive'
         ));
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
-         curl_exec($ch);
+        curl_exec($ch);
 
          return response($request->getContent(),'201')->header('Content-Type','application/json');
     }

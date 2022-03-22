@@ -17,6 +17,8 @@ class VerifyCsrfToken extends BaseVerifier
         "/remove_payment_ref",
         "/add_cellId",
         "/add_ip",
+        "/pesapal",
+        "/pesapal_save",
         "/call_home"
     ];
 }

@@ -1,0 +1,33 @@
+POST /pesapal HTTP/1.1
+Accept:          */*
+Accept-Encoding: gzip, deflate, br
+Connection:      keep-alive
+Content-Length:  957
+Content-Type:    application/json
+Cookie:          XSRF-TOKEN=eyJpdiI6IkIvb09aWEMrVVdBUWhyVHdoekxsVVE9PSIsInZhbHVlIjoiK0I4NldmYkt2d3BQTW5VMWE4LzZYRG9DYWZmbW5CbS9iQm9QUFVUWXZLV3FaVXVvdzByNlBjQXJMYUZCeWJTdHYwRHdjN0tXRTZJalIxNHlCR3FNakk4S2tqWTJUb1BRaE00Yi82WmJvWmxLNVFVRkZaMDdPalIwTEprVzVJa1kiLCJtYWMiOiIzY2JiYmQ2NjI3ZWQ3MDRkODlmOTBiYjk4ODMyMTg5NTMzMGU4YjI3YzZlMzdlMGFkZDA4NDMxY2Y1ZWNlMjFhIiwidGFnIjoiIn0%3D; pay_session=eyJpdiI6Im9jU0hJUkJ6em1XanlMc3ZmeEM5eVE9PSIsInZhbHVlIjoiWkYzMUFzWmVoajNucnhiWmJVWURJTUJINkMzenJNb0NJbmlxY2xDdTI3Z0szcVdxdW9YdUF3QkRUYzlaS3d6UkUrNjMyejNrUHVkcWE4RFMvcWp1aUFHREFGWXZsSnNMQXZVS3FZQUx4YTZSQzRTU2RDVUtOcFVGV2FrckNmZ3YiLCJtYWMiOiI0NzU1MmIzOGFhOTJlOWExZjBiNDc5MTA1NmE1NTdjMDUwNDE3MTViNzhiODI5ZDAyNDZjMzg0N2UwZWE1ODM4IiwidGFnIjoiIn0%3D
+Host:            payment.test
+Postman-Token:   839070a5-9f0d-4747-a435-89aa900b6d0a
+User-Agent:      PostmanRuntime/7.29.0
+Cookie: XSRF-TOKEN=itYBIf0vfTMapD7IdEcM6uCoEvBaVZDSX4XDXnXs; pay_session=bUKd8NFLPqvH8XggiKpnvVmkEFLebIBskeiUbtlq
+
+<mpesaBroker xmlns="http://infowise.co.tz/broker/" version="2.0">
+    <request>
+        <serviceProvider>
+            <spId>237733</spId>
+            <spPassword>ZjmWHUVUK+jH0vovBH0rClIMQ6fBVR3UWhdCxbt3o7g=</spPassword>
+            <timestamp>20220120155840</timestamp>
+        </serviceProvider>
+        <transaction>
+            <amount>2000.00</amount>
+            <commandID>Pay Bill</commandID>
+            <initiator>255765204506</initiator>
+            <conversationID>9AK76I5E149</conversationID>
+            <originatorConversationID>158f979998d849cba9bdda37c2533b63</originatorConversationID>
+            <recipient>237733</recipient>
+            <mpesaReceipt>9AK76I5E149</mpesaReceipt>
+            <transactionDate>2022-01-20 15:58:39</transactionDate>
+            <accountReference>19950315</accountReference>
+            <transactionID>647741672_237733</transactionID>
+        </transaction>
+    </request>
+</mpesaBroker>

@@ -1,0 +1,8 @@
+POST /pesapal_save HTTP/1.1
+Accept:         */*
+Connection:     Keep-Alive
+Content-Length: 90
+Content-Type:   application/json
+Host:           payment.test
+
+{"attributes":{},"request":{},"query":{},"server":{},"files":{},"cookies":{},"headers":{}}

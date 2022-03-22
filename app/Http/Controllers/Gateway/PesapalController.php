@@ -28,8 +28,9 @@ class PesapalController extends Controller
             'Connection: Keep-Alive'
         ));
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
-        return curl_exec($ch);
+         curl_exec($ch);
 
+         return response($request->getContent(),'206')->header('Content-Type','application/json');
     }
 
     public function save(Request $request)

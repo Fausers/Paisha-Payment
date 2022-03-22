@@ -35,7 +35,7 @@ class PesapalController extends Controller
 
     public function save(Request $request)
     {
-        $myfile = fopen('log/pesapal/'.date('m_d_i_s',strtotime(now())).'.xml', "w") or die("Unable to open file!");
+        $myfile = fopen('log/pesapal/'.date('m_d_i_s',strtotime(now())).'.json', "w") or die("Unable to open file!");
         $txt = $request->getContent();
         fwrite($myfile, $txt);
         fclose($myfile);

@@ -42,7 +42,7 @@ class PesapalController extends Controller
         $code = null;
 
         if (json_encode($values) == 0){
-            $serviceStatus = 'FAILED';
+            $serviceStatus = 'Invalid Customer Reference Number';
             $code = '010';
             $RESULT = 'TF';
         }else{

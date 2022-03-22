@@ -37,13 +37,14 @@ class PesapalController extends Controller
         //        Check Existence Of account  Redis
         $values = Redis::sismember('pay_ref', $jdata['CUSTOMERREFERENCEID']);
 
-        $RESULT = "Null";
+        $RESULT = null;
         $serviceStatus = null;
-        $code = 0;
+        $code = null;
 
         if (json_encode($values) == 0){
             $serviceStatus = 'FAILED';
             $code = '010';
+            $RESULT = 'TF';
         }else{
             $serviceStatus = 'SUCCESSFUL';
             $code = '000';

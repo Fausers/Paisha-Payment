@@ -10,11 +10,12 @@ class PesapalController extends Controller
     public function index(Request $request)
     {
 
+
         $payload = simplexml_load_string($request->getContent());
 
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'http://payment.test/pesapal_save');
+        curl_setopt($ch, CURLOPT_URL, url()->current().'/pesapal_save');
         curl_setopt($ch, CURLOPT_HEADER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_VERBOSE, 1);

@@ -34,7 +34,6 @@ class PayReferenceController extends Controller
         }else{
             return response('Payment Reference Already Exist','202')->header('Content-Type','application/json');
         }
-
     }
 
 

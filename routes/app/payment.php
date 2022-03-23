@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // Homepage Route
-Route::group(['middleware' => ['web', 'checkblocked']], function () {
+Route::group(['middleware' => ['auth:api', 'checkblocked']], function () {
     //  Tigo Payment Link
     Route::get('/tigopesa', [PaymentController::class,'generateID'])->name('tigo_pay');
     Route::get('/airtel', [PaymentController::class,'airtel'])->name('aitel');

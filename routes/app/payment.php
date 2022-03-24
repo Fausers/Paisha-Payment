@@ -8,14 +8,16 @@ use App\Http\Controllers\Gateway\PayReferenceController;
 use App\Http\Controllers\Gateway\PesapalController;
 use App\Http\Controllers\Gateway\RedisController;
 use App\Http\Controllers\Gateway\VodacomController;
+use App\Http\Controllers\Gateway\AirtelController;
 use Illuminate\Support\Facades\Route;
 
 
 // Homepage Route
-Route::group(['middleware' => ['auth:api', 'checkblocked']], function () {
+Route::group(['middleware' => ['web', 'checkblocked']], function () {
     //  Tigo Payment Link
     Route::get('/tigopesa', [PaymentController::class,'generateID'])->name('tigo_pay');
-    Route::get('/airtel', [PaymentController::class,'airtel'])->name('aitel');
+    
+    Route::post('/airtel', [AirtelController::class,'index'])->name('aitel');
 
     Route::post('/pesapal', [PesapalController::class,'index'])->name('pesapal');
     Route::post('/pesapal_save', [PesapalController::class,'save'])->name('pesapal_save');

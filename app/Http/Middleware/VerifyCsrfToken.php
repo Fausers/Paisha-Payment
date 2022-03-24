@@ -19,6 +19,7 @@ class VerifyCsrfToken extends BaseVerifier
         "/add_ip",
         "/pesapal",
         "/pesapal_save",
+        "/airtel",
         "/call_home"
     ];
 }

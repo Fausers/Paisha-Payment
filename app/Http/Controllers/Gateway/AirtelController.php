@@ -7,6 +7,24 @@ use Illuminate\Http\Request;
 
 class AirtelController extends Controller
 {
+
+    public function index(Request $request)
+    {
+        $myfile = fopen('log/airtel/'.date('m_d_i_s',strtotime(now())).'.json', "w") or die("Unable to open file!");
+        $txt = $request->getContent();
+        fwrite($myfile, $txt);
+        fclose($myfile);
+
+        $response = ['data'=>["first_name"=> "Dealer","first_name"=> "Dealer"]];
+
+        $ree = "Success";
+
+
+
+        return response(json_encode($ree),'200')->header('Content-Type','application/xml');
+    }
+
+
     public function airtel(Request $request)
     {
         $resources = new Payment();

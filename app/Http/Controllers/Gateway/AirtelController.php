@@ -20,8 +20,7 @@ class AirtelController extends Controller
         $ree = "Success";
 
 
-
-        return response(json_encode($ree),'200')->header('Content-Type','application/xml');
+        return response(json_encode($ree),'200')->header('Content-Type','application/json');
     }
 
 

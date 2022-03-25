@@ -17,7 +17,7 @@ Route::group(['middleware' => ['web', 'checkblocked']], function () {
     //  Tigo Payment Link
     Route::get('/tigopesa', [PaymentController::class,'generateID'])->name('tigo_pay');
     
-    Route::post('/airtel', [AirtelController::class,'index'])->name('aitel');
+    Route::any('/airtel', [AirtelController::class,'index'])->name('aitel');
 
     Route::post('/pesapal', [PesapalController::class,'index'])->name('pesapal');
     Route::post('/pesapal_save', [PesapalController::class,'save'])->name('pesapal_save');

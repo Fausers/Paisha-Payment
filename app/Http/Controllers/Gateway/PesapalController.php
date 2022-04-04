@@ -62,7 +62,7 @@ class PesapalController extends Controller
             'AGTXNID' => $jdata['AGTXNID']);
 
          $response = $this->createResponse($initial_response);
-         
+
         return response($response,'201')->header('Content-Type','application/xml');
     }
 
@@ -91,12 +91,12 @@ class PesapalController extends Controller
 
         $root->appendChild($dom->createElement('TYPE', $responseData['TYPE']));
         $root->appendChild($dom->createElement('REFID', $responseData['REFID']));
-        $root->appendChild($dom->createElement('TXNID', $responseData['TXNID']));
+//        $root->appendChild($dom->createElement('TXNID', $responseData['TXNID']));
         $root->appendChild($dom->createElement('RESULT', $responseData['RESULT']));
         $root->appendChild($dom->createElement('ERRORCODE', $responseData['ERRORCODE']));
         $root->appendChild($dom->createElement('ERRORDESC', $responseData['ERRORDESC']));
         $root->appendChild($dom->createElement('MSISDN', $responseData['MSISDN']));
-        $root->appendChild($dom->createElement('AGTXNID', $responseData['AGTXNID']));
+//        $root->appendChild($dom->createElement('AGTXNID', $responseData['AGTXNID']));
 
         $output=$dom->saveXML();
         return $output;
